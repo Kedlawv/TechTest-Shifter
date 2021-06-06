@@ -1,5 +1,6 @@
 package com.wabu.techTest.faktury;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public abstract class Invoice {
     private LocalDate dueDate;
     private String client;
     private List<InvoiceItem> items;
+    protected BigDecimal taxRate;
 
     public Invoice(String number, String issuer, String client, List<InvoiceItem> items) {
         this.number = number;
@@ -71,6 +73,10 @@ public abstract class Invoice {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public BigDecimal getTaxRate(){
+        return taxRate;
     }
 
     @Override

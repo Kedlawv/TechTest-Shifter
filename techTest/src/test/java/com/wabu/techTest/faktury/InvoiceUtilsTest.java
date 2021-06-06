@@ -100,4 +100,16 @@ class InvoiceUtilsTest {
 
         assertSame(expected, actual);
     }
+
+    @Test
+    void givenInvoiceXDueDate14Days(){
+        LocalDate issueDate = testInvoices.get(0).getDate();
+        LocalDate expectedDueDate = LocalDate.of(2021,5,30);
+
+        LocalDate actual = testInvoices.get(0).getDueDate();
+        System.out.println(issueDate);
+        System.out.println(actual);
+
+        assertTrue(expectedDueDate.isEqual(actual));
+    }
 }
