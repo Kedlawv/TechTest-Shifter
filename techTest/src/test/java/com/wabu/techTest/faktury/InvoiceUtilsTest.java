@@ -16,51 +16,50 @@ class InvoiceUtilsTest {
     List<Invoice> testInvoices;
 
     @BeforeEach
-    public void createInvoices(){
+    public void createInvoices() {
         testInvoices = new ArrayList<>();
 
-        testInvoices.add(new InvoiceX("RZ001","W.Bus", "TTSW",
+        testInvoices.add(new InvoiceX("RZ001", "W.Bus", "TTSW",
                 Arrays.asList(
-                        new InvoiceItem("T-Shirt",BigDecimal.valueOf(10.00D),1000),
-                        new InvoiceItem("Pen",BigDecimal.valueOf(1.50D),10000),
-                        new InvoiceItem("Hat",BigDecimal.valueOf(5.50D),500),
-                        new InvoiceItem("Cup",BigDecimal.valueOf(7.00D),200)
+                        new InvoiceItem("T-Shirt", BigDecimal.valueOf(10.00D), 1000),
+                        new InvoiceItem("Pen", BigDecimal.valueOf(1.50D), 10000),
+                        new InvoiceItem("Hat", BigDecimal.valueOf(5.50D), 500),
+                        new InvoiceItem("Cup", BigDecimal.valueOf(7.00D), 200)
                 )));
-        testInvoices.add(new InvoiceX("RZ002","W.Bus", "Oracle",
+        testInvoices.add(new InvoiceX("RZ002", "W.Bus", "Oracle",
                 Arrays.asList(
-                        new InvoiceItem("T-Shirt",BigDecimal.valueOf(10.00D),101),
-                        new InvoiceItem("Pen",BigDecimal.valueOf(1.50D),50),
-                        new InvoiceItem("Hat",BigDecimal.valueOf(5.50D),70),
-                        new InvoiceItem("Cup",BigDecimal.valueOf(7.00D),5)
+                        new InvoiceItem("T-Shirt", BigDecimal.valueOf(10.00D), 101),
+                        new InvoiceItem("Pen", BigDecimal.valueOf(1.50D), 50),
+                        new InvoiceItem("Hat", BigDecimal.valueOf(5.50D), 70),
+                        new InvoiceItem("Cup", BigDecimal.valueOf(7.00D), 5)
                 )));
-        testInvoices.add(new InvoiceX("RZ003","W.Bus", "Sun Microsystems",
+        testInvoices.add(new InvoiceX("RZ003", "W.Bus", "Sun Microsystems",
                 Arrays.asList(
-                        new InvoiceItem("T-Shirt",BigDecimal.valueOf(10.00D),50),
-                        new InvoiceItem("Pen",BigDecimal.valueOf(1.50D),40),
-                        new InvoiceItem("Hat",BigDecimal.valueOf(5.50D),20),
-                        new InvoiceItem("Cup",BigDecimal.valueOf(7.00D),10)
+                        new InvoiceItem("T-Shirt", BigDecimal.valueOf(10.00D), 50),
+                        new InvoiceItem("Pen", BigDecimal.valueOf(1.50D), 40),
+                        new InvoiceItem("Hat", BigDecimal.valueOf(5.50D), 20),
+                        new InvoiceItem("Cup", BigDecimal.valueOf(7.00D), 10)
                 )));
 
-        testInvoices.add(new InvoiceY("RZ004","W.Bus", "Sun Microsystems",
+        testInvoices.add(new InvoiceY("RZ004", "W.Bus", "Sun Microsystems",
                 Arrays.asList(
-                        new InvoiceItem("T-Shirt",BigDecimal.valueOf(10.00D),100),
-                        new InvoiceItem("Pen",BigDecimal.valueOf(1.50D),40),
-                        new InvoiceItem("Hat",BigDecimal.valueOf(5.50D),100),
-                        new InvoiceItem("Cup",BigDecimal.valueOf(7.00D),10)
+                        new InvoiceItem("T-Shirt", BigDecimal.valueOf(10.00D), 100),
+                        new InvoiceItem("Pen", BigDecimal.valueOf(1.50D), 40),
+                        new InvoiceItem("Hat", BigDecimal.valueOf(5.50D), 100),
+                        new InvoiceItem("Cup", BigDecimal.valueOf(7.00D), 10)
                 )));
-        testInvoices.add(new InvoiceY("RZ005","W.Bus", "Google",
+        testInvoices.add(new InvoiceY("RZ005", "W.Bus", "Google",
                 Arrays.asList(
-                        new InvoiceItem("T-Shirt",BigDecimal.valueOf(10.00D),100),
-                        new InvoiceItem("Pen",BigDecimal.valueOf(1.50D),40000),
-                        new InvoiceItem("Hat",BigDecimal.valueOf(5.50D),100),
-                        new InvoiceItem("Cup",BigDecimal.valueOf(7.00D),10)
+                        new InvoiceItem("T-Shirt", BigDecimal.valueOf(10.00D), 100),
+                        new InvoiceItem("Pen", BigDecimal.valueOf(1.50D), 40000),
+                        new InvoiceItem("Hat", BigDecimal.valueOf(5.50D), 100),
+                        new InvoiceItem("Cup", BigDecimal.valueOf(7.00D), 10)
                 )));
-        testInvoices.get(0).setDate(LocalDate.of(2021,5,16));
-        testInvoices.get(1).setDate(LocalDate.of(2021,5,13));
-        testInvoices.get(2).setDate(LocalDate.of(2021,4,1));
-        testInvoices.get(3).setDate(LocalDate.of(2021,6,1));
-        testInvoices.get(4).setDate(LocalDate.of(2021,6,1));
-
+        testInvoices.get(0).setDate(LocalDate.of(2021, 5, 16));
+        testInvoices.get(1).setDate(LocalDate.of(2021, 5, 13));
+        testInvoices.get(2).setDate(LocalDate.of(2021, 4, 1));
+        testInvoices.get(3).setDate(LocalDate.of(2021, 6, 1));
+        testInvoices.get(4).setDate(LocalDate.of(2021, 6, 1));
 
 
     }
@@ -70,13 +69,13 @@ class InvoiceUtilsTest {
         BigDecimal expectedSum = BigDecimal.valueOf(2245);
 
         BigDecimal actual = new InvoiceUtils().getTotalIncomeToDay(testInvoices,
-                LocalDate.of(2021,5,15));
+                LocalDate.of(2021, 5, 15));
 
-        assertEquals(0,expectedSum.compareTo(actual));
+        assertEquals(0, expectedSum.compareTo(actual));
     }
 
     @Test
-    void getTotalForInvoice(){
+    void getTotalForInvoice() {
         BigDecimal expected = BigDecimal.valueOf(740);
         BigDecimal actual = new InvoiceUtils().getTotal(testInvoices.get(2));
 
@@ -84,27 +83,27 @@ class InvoiceUtilsTest {
     }
 
     @Test
-    void getLargestOfTypeForInvoiceX(){
+    void getLargestOfTypeForInvoiceX() {
         Class<InvoiceX> type = InvoiceX.class;
         Invoice expected = testInvoices.get(0);
-        InvoiceX actual = new InvoiceUtils().getLargestOfType(testInvoices,type);
+        InvoiceX actual = new InvoiceUtils().getLargestOfType(testInvoices, type);
 
         assertSame(expected, actual);
     }
 
     @Test
-    void getLargestOfTypeForInvoiceY(){
+    void getLargestOfTypeForInvoiceY() {
         Class<InvoiceY> type = InvoiceY.class;
         Invoice expected = testInvoices.get(4);
-        InvoiceY actual = new InvoiceUtils().getLargestOfType(testInvoices,type);
+        InvoiceY actual = new InvoiceUtils().getLargestOfType(testInvoices, type);
 
         assertSame(expected, actual);
     }
 
     @Test
-    void givenInvoiceXDueDate14Days(){
+    void givenInvoiceXDueDate14Days() {
         LocalDate issueDate = testInvoices.get(0).getDate();
-        LocalDate expectedDueDate = LocalDate.of(2021,5,30);
+        LocalDate expectedDueDate = LocalDate.of(2021, 5, 30);
 
         LocalDate actual = testInvoices.get(0).getDueDate();
         System.out.println(issueDate);
@@ -114,14 +113,58 @@ class InvoiceUtilsTest {
     }
 
     @Test
-    void givenInvoiceYDueDateLastDayOfMonth(){
+    void givenInvoiceYDueDateLastDayOfMonth() {
         LocalDate issueDate = testInvoices.get(0).getDate();
-        LocalDate expectedDueDate = LocalDate.of(2021,6,30);
+        LocalDate expectedDueDate = LocalDate.of(2021, 6, 30);
 
         LocalDate actual = testInvoices.get(4).getDueDate();
         System.out.println(issueDate);
         System.out.println(actual);
 
         assertTrue(expectedDueDate.isEqual(actual));
+    }
+
+    @Test
+    void givenListOfInvoiceCalculateSumWithTaxForEach() {
+
+        Invoice invoiceX = new InvoiceX("RZ0001", "W.Bus", "Self",
+                Arrays.asList(new InvoiceItem("one", BigDecimal.valueOf(5D), 10),
+                        (new InvoiceItem("two", BigDecimal.valueOf(6D), 10))
+                ));
+        Invoice invoiceY = new InvoiceY("RZ0002", "W.Bus", "Self",
+                Arrays.asList(new InvoiceItem("one", BigDecimal.valueOf(7D), 10),
+                        (new InvoiceItem("two", BigDecimal.valueOf(8D), 10))
+                ));
+        List<Invoice> invoices = new ArrayList<>();
+        invoices.add(invoiceX);
+        invoices.add(invoiceY);
+
+        BigDecimal expected = BigDecimal.valueOf(294.7D);
+        BigDecimal actual = new InvoiceUtils().getSumWithTaxForEach(invoices);
+
+
+        assertEquals(0, expected.compareTo(actual));
+    }
+
+    @Test
+    void givenListOfInvoiceCalculateSumWithTaxStream() {
+
+        Invoice invoiceX = new InvoiceX("RZ0001", "W.Bus", "Self",
+                Arrays.asList(new InvoiceItem("one", BigDecimal.valueOf(5D), 10),
+                        (new InvoiceItem("two", BigDecimal.valueOf(6D), 10))
+                ));
+        Invoice invoiceY = new InvoiceY("RZ0002", "W.Bus", "Self",
+                Arrays.asList(new InvoiceItem("one", BigDecimal.valueOf(7D), 10),
+                        (new InvoiceItem("two", BigDecimal.valueOf(8D), 10))
+                ));
+        List<Invoice> invoices = new ArrayList<>();
+        invoices.add(invoiceX);
+        invoices.add(invoiceY);
+
+        BigDecimal expected = BigDecimal.valueOf(294.7D);
+        BigDecimal actual = new InvoiceUtils().getSumWithTaxStream(invoices);
+
+
+        assertEquals(0, expected.compareTo(actual));
     }
 }

@@ -51,5 +51,42 @@ public class InvoiceUtils {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    /*
+    Implement a method that will return a sum of all invoices where to the value of invoice of type X
+    will be added tax 7% and to the invoice of type Y will be added tax 18%
+
+    I added tax rate to the child classes of Invoice instead of external calculations in case in the
+    future we would add for example an invoice with different tax rate.
+    In that eventuality this method would not need to change
+     */
+
+    public BigDecimal getSumWithTaxForEach(List<Invoice> invoices){
+        BigDecimal sumWithTax = BigDecimal.ZERO;
+        for(Invoice i : invoices){
+            sumWithTax = sumWithTax.add(this.getTotal(i).multiply(BigDecimal.ONE.add(i.taxRate)));
+        }
+
+        return sumWithTax;
+    }
+
+    /*
+    for T reduce(T identity, java.util.function.BinaryOperator<T> accumulator)
+    in the case below we need to use a Combiner. The types of the Accumulator and the types of the lambda do not match
+    Accumulator is Invoice acc(Invoice,Invoice) it cannot infer the types correctly
+    as BigDecimal acc(BigDecimal,Invoice) even though Identity is a BigDecimal
+    Without the combiner BigDecimal::add the sum is of type invoice and return type is Invoice
+     */
+
+    public BigDecimal getSumWithTaxStream(List<Invoice> invoices){
+        return invoices.stream()
+                .reduce(BigDecimal.ZERO,
+                        (sum,invoice) -> sum.add(this.getTotal(invoice)
+                                .multiply(BigDecimal.ONE.add(invoice.taxRate))), BigDecimal::add);
+    }
+
+
+
+
+
 
 }
