@@ -112,4 +112,16 @@ class InvoiceUtilsTest {
 
         assertTrue(expectedDueDate.isEqual(actual));
     }
+
+    @Test
+    void givenInvoiceYDueDateLastDayOfMonth(){
+        LocalDate issueDate = testInvoices.get(0).getDate();
+        LocalDate expectedDueDate = LocalDate.of(2021,6,30);
+
+        LocalDate actual = testInvoices.get(4).getDueDate();
+        System.out.println(issueDate);
+        System.out.println(actual);
+
+        assertTrue(expectedDueDate.isEqual(actual));
+    }
 }
