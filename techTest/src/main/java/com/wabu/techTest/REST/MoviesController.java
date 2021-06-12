@@ -36,7 +36,16 @@ public class MoviesController {
     }
 
     @PutMapping("/movies")
-    public void updateMovie(@RequestBody Movie movie) {
-        // out of time
+    public ResponseEntity updateMovie(@RequestBody Movie movie) {
+        Optional<Movie> movieToBeUpdated = repository.findById(movie.getId());
+        if(movieToBeUpdated.isPresent()){
+            Movie existingMovie = movieToBeUpdated.get();
+            existingMovie.setName(movie.getName());
+            existingMovie.setDescription(movie.getDescription());
+            existingMovie.setDirector(movie.getDirector());
+            return new ResponseEntity<Movie>(repository.findById(existingMovie.getId()).get(),HttpStatus.OK);
+        }else{
+            return new ResponseEntity("id not found",HttpStatus.BAD_REQUEST);
+        }
     }
 }
